@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once("../db.php"); 
+require_once("../includes/db.php"); 
 
 //login form
 if (isset($_POST['login-submit'])) {
@@ -17,11 +17,7 @@ if (isset($_POST['login-submit'])) {
       $row = $result->fetch_assoc();
       $_SESSION['user_id'] = $row['id'];
       $_SESSION['role'] = $row['role'];
-      if ($row['role'] == 'admin') {
-        redirect("./user/admin.php");
-      }else if($row['role'] == 'member') {
-        redirect("./user/member.php");
-      }
+      redirect("./user/list.php");
     }else{
       $_SESSION['error'] = "Invalid Username Password used. Please check and retry.";
       redirect("index.php");
@@ -63,7 +59,7 @@ if (isset($_POST['register-submit'])) {
     if ($conn->affected_rows) {
       $_SESSION['user_id'] = $conn->insert_id;
       $_SESSION['role'] = "member";
-      redirect("./user/member.php");
+      redirect("./user/list.php");
     }else{
       $_SESSION['error'] = "Error While creating user. Please retry after sometime.";
       redirect("index.php");
@@ -71,6 +67,5 @@ if (isset($_POST['register-submit'])) {
   }
 
 }
-
 $conn->close();
 ?>

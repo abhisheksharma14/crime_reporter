@@ -37,6 +37,7 @@ h1 {
 .sidebar {
   padding-left: 0;
   padding-right: 0;
+  background-color: #aaa;
 }
 
 .sidebar .nav {
@@ -67,4 +68,17 @@ h1 {
 .placeholder img {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+
+main h3{
+  display: inline-block;
+}
+
+#crime-list {
+  margin-top: 20px;
+}
+
+#crime-list-table {
+  margin-top: 20px;
 }

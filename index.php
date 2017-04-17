@@ -1,12 +1,9 @@
 <?php session_start(); 
-  require_once("db.php");
+  require_once("./includes/db.php");
   if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
-    if ($_SESSION['role'] == 'admin') {
-      redirect("./user/admin.php");
-    }elseif ($_SESSION['role'] == 'member') {
-      redirect("./user/member.php");
-    }
+    redirect("./user/list.php");
   }
+  $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +130,6 @@
         $(this).addClass('active');
         e.preventDefault();
       });
-
     });
     </script>
 

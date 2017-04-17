@@ -10,6 +10,34 @@ function redirect($url){
     die();
 }
 
+function validate_login($url = NULL){
+	if (!isset($_SESSION['user_id'])) {
+		redirect("index.php");
+	}
+	switch ($url) {
+		case 'report':
+			if ($_SESSION['role'] !== 'admin'){
+				redirect("./user/member.php");
+			}
+			break;
+		
+		case 'admin':
+			if ($_SESSION['role'] !== 'admin'){
+				redirect("./user/member.php");
+			}
+			break;
+
+		case 'member':
+			if ($_SESSION['role'] !== 'member'){
+				redirect("index.php");
+			}
+			break;
+
+		default:
+			break;
+	}
+}
+
 $servername = "localhost";
 $username = "urbanwand";
 $password = "urbanwand";
