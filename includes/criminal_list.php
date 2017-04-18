@@ -41,7 +41,8 @@ function fetch_crime_list($from, $to){
 $crime_list = fetch_crime_list($from_date, $to_date);
 ?>
 
-<h3 class="pull-left">Crime List</h3>
+<h3 class="pull-left">Criminal List</h3>
+<button class="btn btn-success pull-right" data-toggle="modal" data-target="#add-criminal"><i class="fa fa-plus-circle"></i> New Criminal</button>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" id="crime-list" method="post" accept-charset="utf-8" class="form form-inline col-md-8 col-sm-8 col-lg-8 col-xs-12 pull-right">
   <div class="form-group">
     <label for="name">From </label>
@@ -96,3 +97,66 @@ $crime_list = fetch_crime_list($from_date, $to_date);
   ?>
   </tbody>
 </table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="add-criminal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form col-md-12 col-sm-12 col-lg-12 col-xs-12" enctype="multipart/form-data" action="./upload_criminal.php" method="post">
+          <div class="form-group">
+            <label for="name">Name </label>
+            <input type="text" class="form-control" name="name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email </label>
+            <input type="email" class="form-control" name="email" />
+          </div>
+          <div class="form-group">
+            <label for="address">Address </label>
+            <textarea class="form-control" name="address" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="description">Decription </label>
+            <textarea class="form-control" name="description" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="status">Status </label>
+            <select name="status" class="form-control">
+              <option value="suspect">Suspect</option>
+              <option value="caught">Caught</option>
+              <option value="uncaught">Uncaught</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Upload Image: </label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="200000" /> 
+            <input type="file" class="btn" name="images[]" multiple/>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info pull-right" value="Upload!" />
+          </div>
+        </form>
+        <style type="text/css" media="screen">
+          .response span.alert{
+            width: 100%;
+            float: left;
+          }
+        </style>
+        <div class="response col-md-12 col-sm-12 col-lg-12 col-xs-12 pull-right">
+          <?php
+          if (isset($_SESSION['error'])){
+            echo $_SESSION['error'];
+            $_SESSION['error'] = "";
+          }
+          ?>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
