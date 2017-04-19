@@ -81,13 +81,13 @@ $crime_list = fetch_crime_list($from_date, $to_date);
               <td>'.$crime['created_date'].'</td>';
       if ($_SESSION['role'] == 'admin')
         echo '<td>
-                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$crime['id'].')"></i> 
-                <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="edit_crime('.$crime['id'].')"></i> 
-                <i class="fa fa-trash text-danger pull-left btn btn-sm" onclick="delete_crime('.$crime['id'].')"></i>
+                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="getCrime('.$crime['id'].')"></i> 
+                <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="editCrime('.$crime['id'].')"></i> 
+                <i class="fa fa-trash text-danger pull-left btn btn-sm" onclick="deleteCrime('.$crime['id'].')"></i>
               </td>';
       else 
         echo '<td>
-                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$crime['id'].')"></i>
+                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="getCrime('.$crime['id'].')"></i>
               </td>';
       echo  '</tr>';
     }
