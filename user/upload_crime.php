@@ -76,5 +76,5 @@ if ($response) {
 
 $_SESSION['error'] = $message;
 $conn->close();
-header("location:report.php");
+redirect("criminal_list.php");
 ?>

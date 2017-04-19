@@ -28,7 +28,7 @@ function fetch_criminal_list($from, $to){
       $data[$key]['description'] = $row['description'];
       $data[$key]['created_by'] = $row['created_by_user'];
       $data[$key]['created_date'] = $row['created_date'];
-      $data[$key]['images'] = $row['images'];
+      $data[$key]['images'] = $row['image'];
       $data[$key]['status'] = $row['status'];
       $key++;
     }
@@ -63,15 +63,13 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
       <th>Status</th>
       <th>Reported By</th>
       <th>Dated</th>
-      <?php if ($_SESSION['role'] == 'admin'): ?>
-        <th>Action</th>
-      <?php endif ?>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
   <?php
   if (count($criminal_list)) {
-    foreach ($criminal_list as $key => $crimeinal) {
+    foreach ($criminal_list as $key => $criminal) {
       echo '<tr>
               <td>'.($key+1).'</td>
               <td>'.$criminal['name'].'</td>
@@ -92,7 +90,7 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
       echo  '</tr>';
     }
   }else{
-    echo "<tr><td colspan=9>No data found. Please try another date.</td></tr>";
+    echo "<tr><td colspan=7>No data found. Please try another date.</td></tr>";
   }
   ?>
   </tbody>
@@ -160,3 +158,13 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
+
+<?php 
+  if (!isset($_SESSION['error'])){
+?>
+    <script>
+      $("#add-criminal").modal("show");
+    </script>
+<?php
+  }
+?>
