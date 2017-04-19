@@ -39,8 +39,8 @@ function validate_login($url = NULL){
 }
 
 $servername = "localhost";
-$username = "urbanwand";
-$password = "urbanwand";
+$username = "root";
+$password = "patanahi";
 $database = "crime";
 
 //tables
