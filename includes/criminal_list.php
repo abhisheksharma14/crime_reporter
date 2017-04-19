@@ -158,13 +158,3 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
-
-<?php 
-  if (!isset($_SESSION['error'])){
-?>
-    <script>
-      $("#add-criminal").modal("show");
-    </script>
-<?php
-  }
-?>

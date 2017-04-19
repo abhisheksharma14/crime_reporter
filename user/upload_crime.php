@@ -72,9 +72,7 @@ if ($response) {
     }	
 }
 
-
-
 $_SESSION['error'] = $message;
 $conn->close();
-redirect("criminal_list.php");
+redirect("./list.php");
 ?>
