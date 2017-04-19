@@ -38,7 +38,26 @@ function fetch_crime_list($from, $to){
   return $data;
 }
 
+function fetch_criminal_list(){
+  global $conn;
+  $query_fetch_criminals = "SELECT id, name, image FROM criminal";
+  $result = $conn->query($query_fetch_criminals);
+  if ($result->num_rows) {
+    $key = 0;
+    while ($row = mysqli_fetch_assoc($result)) {
+      $data[$key]['id'] = $row['id'];
+      $data[$key]['name'] = $row['name'];
+      $data[$key]['type'] = $row['image'];
+      $key++;
+    }
+  }else{
+    $data = array();
+  }
+  return $data;
+}
+
 $crime_list = fetch_crime_list($from_date, $to_date);
+$criminal_list = fetch_criminal_list();
 ?>
 
 <h3 class="pull-left">Crime List</h3>
@@ -103,7 +122,7 @@ $crime_list = fetch_crime_list($from_date, $to_date);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Report New Crime</h4>
       </div>
       <div class="modal-body">
         <form class="form col-md-12 col-sm-12 col-lg-12 col-xs-12" enctype="multipart/form-data" action="./upload_crime.php" method="post">
@@ -114,6 +133,18 @@ $crime_list = fetch_crime_list($from_date, $to_date);
           <div class="form-group">
             <label for="type">Type </label>
             <input type="text" class="form-control" name="type" />
+          </div>
+          <div class="form-group">
+            <label for="crimminals">Criminals </label>
+            <select id="example-getting-started" class="multiselect-dropdown" name="criminals[]" multiple="multiple">
+              <?php 
+              if (count($criminal_list)) {
+                foreach ($criminal_list as $key => $criminal){
+                  echo "<option value='$criminal[id]'>$criminal[name]</option>";
+                }
+              }else{ echo "<option value='0' disabled>No Criminal added yet</option>"; }
+              ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="description">Decription </label>
@@ -148,6 +179,20 @@ $crime_list = fetch_crime_list($from_date, $to_date);
           ?>
         </div>
         <div style="clear: both;"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="report-crime">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Crime Details</h4>
+      </div>
+      <div class="modal-body">
+        
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

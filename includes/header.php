@@ -18,6 +18,7 @@ $url = $_SERVER['REQUEST_URI'];
     <link href="../css/bootstrap/font-awesome.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap-multiselect.css" rel="stylesheet">
     <?php
       if (strpos($url, "list.php")) {
         echo '<link href="../css/dataTables.bootstrap.min.css" rel="stylesheet">';

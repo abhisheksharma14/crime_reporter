@@ -6,7 +6,11 @@ function getCrime(crimeId){
 		data: {id: crimeId},
 	})
 	.done(function(data) {
-		console.log(data);
+		if (data.response == 0) {
+			alert(data.message);
+		}else{
+			
+		}
 	})
 	.fail(function(err) {
 		console.log(err);
@@ -70,3 +74,10 @@ function deleteCriminal(criminalId){
 		console.log("complete");
 	});
 };
+
+$(document).ready(function() {
+    $('.multiselect-dropdown').multiselect({
+        enableFiltering: true,
+        filterPlaceholder: 'Search for something...'
+    });
+});

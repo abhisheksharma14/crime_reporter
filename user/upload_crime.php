@@ -39,6 +39,7 @@ $description = isset($_POST["description"])?$_POST["description"]:"";;
 $tags = isset($_POST["tags"])?$_POST["tags"]:"";
 $crime_date = isset($_POST["occured_on"])?$_POST["occured_on"]:"";
 $status = isset($_POST["status"])?$_POST["status"]:"unsolved";
+$criminals = isset($_POST["criminals"])?$_POST["criminals"]:0;
 
 if (!strlen($name) || 
 	!strlen($type) || 
@@ -63,16 +64,24 @@ if ($response) {
 	$query_insert_crime = "INSERT INTO crime VALUES (NULL, '$name', '$type', '$description', '$tags', '$reported_by', '$crime_date', '$status', '$images', '$created_date', '$modified_date')";
 	$result = $conn->query($query_insert_crime);
     if ($conn->error) {
-      $message .= "<br/><span class='alert alert-danger'>".$conn->error."</span>";
+    	$message .= "<br/><span class='alert alert-danger'>".$conn->error."</span>";
     }
+    $crime_id = $conn->insert_id;
     if ($conn->affected_rows) {
-      $message .= "<br/><span class='alert alert-success'>Crime reported successfully</span>";
+		if ($criminals) {
+			foreach ($criminals as $key => $criminal) {
+				$query_insert_mapping = "INSERT INTO criminal_mapping VALUES(NULL, $crime_id, $criminal, NOW(), NOW())";
+				$mapp = $conn->query($query_insert_mapping); 
+			}
+		}
+    	$message .= "<br/><span class='alert alert-success'>Crime reported successfully</span>";
     }else{
       $message .= "<br/><span class='alert alert-danger'>Error while inserting data</span>";
-    }	
+    }
 }
+
 
 $_SESSION['error'] = $message;
 $conn->close();
-redirect("./list.php");
+redirect("user/list.php");
 ?>
