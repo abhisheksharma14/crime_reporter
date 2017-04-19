@@ -1,32 +1,32 @@
 <?php
 if (isset($_POST['from_date'])) {
-    $from_date = $_POST['from_date'];
+  $from_date = $_POST['from_date'];
 }else{
   $from_date = date("Y-m-d", strtotime("-7 days"));
 }
 
 if (isset($_POST['to_date'])) {
-    $to_date = $_POST['to_date'];
+  $to_date = $_POST['to_date'];
 }else{
   $to_date = date("Y-m-d");
 }
 
-function fetch_crime_list($from, $to){
+function fetch_criminal_list($from, $to){
   global $conn;
-  $query_fetch_crimes = "SELECT crime.*, user.name AS reported_by_user 
-                          FROM crime
-                          INNER JOIN user ON crime.reported_by = user.id 
-                          WHERE crime.created_date >= '$from 00:00:00' AND crime.created_date <= '$to 23:59:59'
-                          ORDER BY crime.created_date DESC";
+  $query_fetch_crimes = "SELECT criminal.*, user.name AS created_by_user 
+                          FROM criminal
+                          INNER JOIN user ON criminal.created_by = user.id 
+                          WHERE criminal.created_date >= '$from 00:00:00' AND criminal.created_date <= '$to 23:59:59'
+                          ORDER BY criminal.created_date DESC";
   $result = $conn->query($query_fetch_crimes);
   if ($result->num_rows) {
     $key = 0;
     while ($row = mysqli_fetch_assoc($result)) {
       $data[$key]['id'] = $row['id'];
       $data[$key]['name'] = $row['name'];
-      $data[$key]['type'] = $row['type'];
+      $data[$key]['address'] = $row['address'];
       $data[$key]['description'] = $row['description'];
-      $data[$key]['reported_by'] = $row['reported_by_user'];
+      $data[$key]['created_by'] = $row['created_by_user'];
       $data[$key]['created_date'] = $row['created_date'];
       $data[$key]['images'] = $row['images'];
       $data[$key]['status'] = $row['status'];
@@ -38,7 +38,7 @@ function fetch_crime_list($from, $to){
   return $data;
 }
 
-$crime_list = fetch_crime_list($from_date, $to_date);
+$criminal_list = fetch_criminal_list($from_date, $to_date);
 ?>
 
 <h3 class="pull-left">Criminal List</h3>
@@ -59,7 +59,7 @@ $crime_list = fetch_crime_list($from_date, $to_date);
     <tr>
       <th>#</th>
       <th>Name</th>
-      <th>Type</th>
+      <th>Address</th>
       <th>Status</th>
       <th>Reported By</th>
       <th>Dated</th>
@@ -70,24 +70,24 @@ $crime_list = fetch_crime_list($from_date, $to_date);
   </thead>
   <tbody>
   <?php
-  if (count($crime_list)) {
-    foreach ($crime_list as $key => $crime) {
+  if (count($criminal_list)) {
+    foreach ($criminal_list as $key => $crimeinal) {
       echo '<tr>
               <td>'.($key+1).'</td>
-              <td>'.$crime['name'].'</td>
-              <td>'.$crime['type'].'</td>
-              <td>'.$crime['status'].'</td>
-              <td>'.$crime['reported_by'].'</td>
-              <td>'.$crime['created_date'].'</td>';
+              <td>'.$criminal['name'].'</td>
+              <td>'.$criminal['address'].'</td>
+              <td>'.$criminal['status'].'</td>
+              <td>'.$criminal['created_by'].'</td>
+              <td>'.$criminal['created_date'].'</td>';
       if ($_SESSION['role'] == 'admin')
         echo '<td>
-                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$crime['id'].')"></i> 
-                <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="edit_crime('.$crime['id'].')"></i> 
-                <i class="fa fa-trash text-danger pull-left btn btn-sm" onclick="delete_crime('.$crime['id'].')"></i>
+                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$criminal['id'].')"></i> 
+                <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="edit_crime('.$criminal['id'].')"></i> 
+                <i class="fa fa-trash text-danger pull-left btn btn-sm" onclick="delete_crime('.$criminal['id'].')"></i>
               </td>';
       else 
         echo '<td>
-                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$crime['id'].')"></i>
+                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="get_crime('.$criminal['id'].')"></i>
               </td>';
       echo  '</tr>';
     }
