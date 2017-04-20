@@ -128,6 +128,7 @@ function get_crime($crime_id){
 		$data["crime"]['status'] = $row['status'];
 		$data["crime"]['tags'] = $row['tags'];
 		$data["crime"]['criminal_ids'] = $row['criminal_ids'];
+		$data["crime"]['criminal_names'] = $row['criminal_names'];
 		$data["crime"]['criminal_images'] = $row['criminal_images'];
 		$data["response"] = 1;
 		$data["message"] = "Crime Details Found";
@@ -182,15 +183,15 @@ function get_criminal($criminal_id){
 
 	if ($result->num_rows) {
 	    $row = mysqli_fetch_assoc($result);
-		$data["crime"]['id'] = $row['id'];
-		$data["crime"]['name'] = $row['name'];
-		$data["crime"]['address'] = $row['address'];
-		$data["crime"]['description'] = $row['description'];
-		$data["crime"]['created_by'] = $row['created_by_user'];
-		$data["crime"]['created_date'] = $row['created_date'];
-		$data["crime"]['images'] = $row['image'];
-		$data["crime"]['status'] = $row['status'];
-		$data["crime"]['tags'] = $row['status'];
+		$data["criminal"]['id'] = $row['id'];
+		$data["criminal"]['name'] = $row['name'];
+		$data["criminal"]['address'] = $row['address'];
+		$data["criminal"]['description'] = $row['description'];
+		$data["criminal"]['created_by'] = $row['reported_by_user'];
+		$data["criminal"]['created_date'] = $row['created_date'];
+		$data["criminal"]['images'] = $row['image'];
+		$data["criminal"]['status'] = $row['status'];
+		$data["criminal"]['tags'] = $row['tags'];
 		$data["response"] = 1;
 		$data["message"] = "Crime Details Found";
   	}else{

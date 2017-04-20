@@ -52,11 +52,11 @@ $url = $_SERVER['REQUEST_URI'];
 
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-faded sidebar">
+        <nav class="col-xs-3 col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link active" href="./dashboard.php"> <i class="fa fa-dashboard fa-lg"></i> Dashboard <span class="sr-only">(current)</span></a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link active" href="./list.php"> <i class="fa fa-list fa-lg"></i>  Crime List <span class="sr-only">(current)</span></a>
             </li>
@@ -66,5 +66,5 @@ $url = $_SERVER['REQUEST_URI'];
           </ul>
         </nav>
 
-        <main class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 col-lg-offset-2">
+        <main class="col-xs-9 col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-xs-offset-3 col-sm-offset-3 col-md-offset-2 col-lg-offset-2">
         <!-- Content -->

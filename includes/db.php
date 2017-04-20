@@ -40,7 +40,7 @@ function validate_login($url = NULL){
 
 $servername = "localhost";
 $username = "root";
-$password = "patanahi";
+$password = "root";
 $database = "crime";
 
 //tables
