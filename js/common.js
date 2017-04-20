@@ -51,13 +51,15 @@ function deleteCrime(crimeId){
 		data: {id: crimeId},
 	})
 	.done(function(data) {
-		console.log(data);
+		if (data.response != 1 ) {
+			alert("Could not be delated. Try again.");
+		}else{
+			window.location.reload();
+		}
 	})
 	.fail(function(err) {
-		console.log(err);
 	})
 	.always(function(data) {
-		console.log("complete");
 	});
 };
 
@@ -113,7 +115,11 @@ function deleteCriminal(criminalId){
 		data: {id: criminalId},
 	})
 	.done(function(data) {
-		console.log(data);
+		if (data.response != 1 ) {
+			alert("Could not be delated. Try again.");
+		}else{
+			window.location.reload();
+		}
 	})
 	.fail(function(err) {
 		console.log(err);
