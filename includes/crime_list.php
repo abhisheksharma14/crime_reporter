@@ -1,12 +1,12 @@
 <?php
 if (isset($_POST['from_date'])) {
-    $from_date = $_POST['from_date'];
+  $from_date = $_POST['from_date'];
 }else{
   $from_date = date("Y-m-d", strtotime("-7 days"));
 }
 
 if (isset($_POST['to_date'])) {
-    $to_date = $_POST['to_date'];
+  $to_date = $_POST['to_date'];
 }else{
   $to_date = date("Y-m-d");
 }
@@ -61,7 +61,10 @@ $criminal_list = fetch_criminal_list();
 ?>
 
 <h3 class="pull-left">Crime List</h3>
-<button class="btn btn-success pull-right" data-toggle="modal" data-target="#report-crime"><i class="fa fa-plus-circle"></i> Report New Crime</button>
+<?php if ($_SESSION['role'] == 'admin') {
+  echo '<button class="btn btn-success pull-right" data-toggle="modal" data-target="#report-crime"><i class="fa fa-plus-circle"></i> Report New Crime</button>';
+} ?>
+
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" id="crime-list" method="post" accept-charset="utf-8" class="form form-inline col-md-7 col-sm-7 col-lg-7 col-xs-12 pull-right">
   <div class="form-group">
     <label for="name">From </label>

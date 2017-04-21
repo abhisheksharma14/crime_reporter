@@ -59,8 +59,13 @@
                   <?php unset($_SESSION['error']); endif ?>
                   <div class="form-group">
                     <div class="row">
-                      <div class="col-sm-6 col-sm-offset-3">
+                      <div class="col-sm-4 col-sm-offset-1">
                         <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                      </div>
+                      <div class="col-sm-4 col-sm-offset-1">
+                        <a href="./user/validate.php?user=guest">
+                          <input type="button" name="guest-login" id="guest-login" tabindex="5" class="form-control btn btn-login" value="Guest">
+                        </a>
                       </div>
                     </div>
                   </div>

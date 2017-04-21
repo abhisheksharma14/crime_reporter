@@ -64,6 +64,11 @@ body {
   text-transform: uppercase;
   border-color: #59B2E6;
 }
+
+#guest-login {
+  background-color: #0E2B95;
+}
+
 .btn-login:hover,
 .btn-login:focus {
   color: #fff;

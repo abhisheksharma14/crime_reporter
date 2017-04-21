@@ -65,7 +65,12 @@ if (isset($_POST['register-submit'])) {
       redirect("index.php");
     }
   }
+}
 
+if (isset($_GET['user']) && $_GET['user'] == 'guest') {
+  $_SESSION['user_id'] = 1;
+  $_SESSION['role'] = "member";
+  redirect("./user/list.php");
 }
 $conn->close();
 ?>

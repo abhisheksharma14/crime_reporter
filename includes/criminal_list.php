@@ -42,7 +42,10 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
 ?>
 
 <h3 class="pull-left">Criminal List</h3>
-<button class="btn btn-success pull-right" data-toggle="modal" data-target="#add-criminal"><i class="fa fa-plus-circle"></i> New Criminal</button>
+<?php if ($_SESSION['role'] == 'admin') {
+  echo '<button class="btn btn-success pull-right" data-toggle="modal" data-target="#add-criminal"><i class="fa fa-plus-circle"></i> New Criminal</button>';
+} ?>
+
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" id="crime-list" method="post" accept-charset="utf-8" class="form form-inline col-md-8 col-sm-8 col-lg-8 col-xs-12 pull-right">
   <div class="form-group">
     <label for="name">From </label>
