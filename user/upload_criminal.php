@@ -46,11 +46,10 @@ if (!strlen($name) || !strlen($description)) {
 }
 if ($response) {
 	$name = filter_var($name, FILTER_SANITIZE_STRING);
-	$email = filter_var($type, FILTER_SANITIZE_STRING);
+	$email = filter_var($email, FILTER_SANITIZE_STRING);
 	$description = filter_var($description, FILTER_SANITIZE_STRING);
 	$address = filter_var($address, FILTER_SANITIZE_STRING);
 	$tags = filter_var($tags, FILTER_SANITIZE_STRING);
-	$crime_date = filter_var($crime_date, FILTER_SANITIZE_STRING);
 	$images = filter_var(implode(",", $stored_images), FILTER_SANITIZE_STRING);
 	$status = filter_var($status, FILTER_SANITIZE_STRING);
 	$created_by = $_SESSION['user_id'];

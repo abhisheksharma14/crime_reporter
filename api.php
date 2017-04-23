@@ -176,11 +176,10 @@ function get_criminal($criminal_id){
 		FROM criminal 
 		LEFT JOIN criminal_mapping cm ON cm.criminal_id = criminal.id
 		LEFT JOIN crime ON crime.id = cm.crime_id
-		INNER JOIN user ON user.id = crime.reported_by
+		INNER JOIN user ON user.id = criminal.created_by
 		WHERE criminal.id = $criminal_id
 		GROUP BY criminal.id";
 	$result = $conn->query($query_get_criminal_details);
-
 	if ($result->num_rows) {
 	    $row = mysqli_fetch_assoc($result);
 		$data["criminal"]['id'] = $row['id'];
@@ -195,11 +194,10 @@ function get_criminal($criminal_id){
 		$data["response"] = 1;
 		$data["message"] = "Crime Details Found";
   	}else{
-		$data["response"] = 1;
+		$data["response"] = 0;
 		$data["message"] = "No result found. Please refresh and retry.";
   	}
   	return $data;
-
 }
 
 function delete_criminal($criminal_id){

@@ -88,7 +88,7 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
               </td>';
       else 
         echo '<td>
-                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="getCrime('.$criminal['id'].')"></i>
+                <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="getCriminal('.$criminal['id'].')"></i>
               </td>';
       echo  '</tr>';
     }
@@ -196,6 +196,70 @@ $criminal_list = fetch_criminal_list($from_date, $to_date);
       </div>
       <div class="modal-footer">
         <button class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="update-criminal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form col-md-12 col-sm-12 col-lg-12 col-xs-12" enctype="multipart/form-data" action="./update_criminal.php" method="post">
+          <div class="form-group">
+            <label for="name">Name </label>
+            <input type="text" class="form-control" name="name" />
+            <input type="hidden" class="form-control" name="criminal_id" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email </label>
+            <input type="email" class="form-control" name="email" />
+          </div>
+          <div class="form-group">
+            <label for="address">Address </label>
+            <textarea class="form-control" name="address" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="description">Decription </label>
+            <textarea class="form-control" name="description" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="status">Status </label>
+            <select name="status" class="form-control">
+              <option value="suspect">Suspect</option>
+              <option value="caught">Caught</option>
+              <option value="uncaught">Uncaught</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Upload Image: (Ignore if no change)</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="200000" /> 
+            <input type="file" class="btn" name="images[]" multiple/>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info pull-right" value="Upload!" />
+          </div>
+        </form>
+        <style type="text/css" media="screen">
+          .response span.alert{
+            width: 100%;
+            float: left;
+          }
+        </style>
+        <div class="response col-md-12 col-sm-12 col-lg-12 col-xs-12 pull-right">
+          <?php
+          if (isset($_SESSION['error'])){
+            echo $_SESSION['error'];
+            $_SESSION['error'] = "";
+          }
+          ?>
+        </div>
+        <div style="clear: both;"></div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

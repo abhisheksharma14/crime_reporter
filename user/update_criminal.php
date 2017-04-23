@@ -2,15 +2,15 @@
 session_start();
 require_once("../includes/db.php");
 validate_login('report');
-if (!isset($_POST['crime_id'])) {
-	$_SESSION['error'] = "Invalid Crime ID recieved. Please Refresh and retry";
+if (!isset($_POST['criminal_id'])) {
+	$_SESSION['error'] = "Invalid Criminal ID recieved. Please Refresh and retry";
 	$conn->close();
-	redirect("user/list.php");
+	redirect("user/criminal_list.php");
 }else{
-	$crime_id = $_POST['crime_id'];
+	$criminal_id = $_POST['criminal_id'];
 }
-$response = 1;
 $stored_images = [];
+$response = 1;
 if ( isset( $_FILES['images'] ) && $_FILES['images']['error'] == 0) {
 	$valid_mime = array("jpg", "png", "jpeg");
 	$source_files = $_FILES['images']['name'];
@@ -42,66 +42,52 @@ if ( isset( $_FILES['images'] ) && $_FILES['images']['error'] == 0) {
 }
 
 $name = isset($_POST["name"])?$_POST["name"]:"";
-$type = isset($_POST["type"])?$_POST["type"]:"";
+$email = isset($_POST["email"])?$_POST["email"]:"";
 $description = isset($_POST["description"])?$_POST["description"]:"";;
+$address = isset($_POST["address"])?$_POST["address"]:"";;
 $tags = isset($_POST["tags"])?$_POST["tags"]:"";
-$crime_date = isset($_POST["occured_on"])?$_POST["occured_on"]:"";
 $status = isset($_POST["status"])?$_POST["status"]:"unsolved";
-$criminals = isset($_POST["criminals"])?$_POST["criminals"]:0;
 
-if (!strlen($name) || 
-	!strlen($type) || 
-	!strlen($description) ||
-	// !strlen($tags) || 
-	!strlen($crime_date)) {
-	$message .= "<br/><span class='alert alert-danger'>All fields are mandetory</span>";
+if (!strlen($name) || !strlen($description)) {
+	$message .= "<br/><span class='alert alert-danger'>Name and description are compulsory</span>";
 	$response = 0;
 }
 if ($response) {
 	$name = filter_var($name, FILTER_SANITIZE_STRING);
-	$type = filter_var($type, FILTER_SANITIZE_STRING);
+	$email = filter_var($email, FILTER_SANITIZE_STRING);
 	$description = filter_var($description, FILTER_SANITIZE_STRING);
+	$address = filter_var($address, FILTER_SANITIZE_STRING);
 	$tags = filter_var($tags, FILTER_SANITIZE_STRING);
-	$reported_by = $_SESSION['user_id'];
-	$crime_date = filter_var($crime_date, FILTER_SANITIZE_STRING);
-	$status = filter_var($status, FILTER_SANITIZE_STRING);
 	$images = filter_var(implode(",", $stored_images), FILTER_SANITIZE_STRING);
+	$status = filter_var($status, FILTER_SANITIZE_STRING);
+	$created_by = $_SESSION['user_id'];
+	$created_date = date("Y-m-d H:i:s");
 	$modified_date = date("Y-m-d H:i:s");
 
-	$query_update_crime = "UPDATE crime 
+	$query_update_criminal = "UPDATE criminal 
 							SET name = '$name', 
-							type = '$type', 
+							email = '$email', 
 							description = '$description', 
 							tags = '$tags',
-							reported_by = '$reported_by',
-							crime_date = '$crime_date',
 							status = '$status', 
 							modified_date = '$modified_date'";
 	if (strlen($images)) {
-		$query_update_crime .= ", images = '$images'";
+		$query_update_criminal .= ", image = '$images'";
 	}
-	$query_update_crime .= " WHERE id =  '$crime_id'";
+	$query_update_criminal .= " WHERE id =  '$criminal_id'";
 
-	$result = $conn->query($query_update_crime);
+	$result = $conn->query($query_update_criminal);
     if ($conn->error) {
-    	$message .= "<br/><span class='alert alert-danger'>".$conn->error."</span>";
+      $message .= "<br/><span class='alert alert-danger'>".$conn->error."</span>";
     }
     if ($conn->affected_rows) {
-		if ($criminals) {
-			$query_delete_mapping = "DELETE FROM criminal_mapping WHERE crime_id = $crime_id";
-			$conn->query($query_delete_mapping);
-			foreach ($criminals as $key => $criminal) {
-				$query_insert_mapping = "INSERT INTO criminal_mapping VALUES(NULL, $crime_id, $criminal, NOW(), NOW())";
-				$mapp = $conn->query($query_insert_mapping);
-			}
-		}
-    	$message .= "<br/><span class='alert alert-success'>Crime reported successfully</span>";
+      $message .= "<br/><span class='alert alert-success'>Crime reported successfully</span>";
     }else{
-      $message .= "<br/><span class='alert alert-danger'>Error while updating data</span>";
+      $message .= "<br/><span class='alert alert-danger'>Error while inserting data</span>";
     }
 }
 
 $_SESSION['error'] = $message;
 $conn->close();
-redirect("user/list.php");
+redirect("./user/criminal_list.php");
 ?>

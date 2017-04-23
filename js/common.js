@@ -133,6 +133,38 @@ function getCriminal(criminalId){
 	});
 };
 
+function editCriminal(criminalId){
+	$.ajax({
+		url: '../api.php?action=get_criminal',
+		type: 'POST',
+		dataType: 'json',
+		data: {id: criminalId},
+	})
+	.done(function(data) {
+		if (data.repsonse == 0) {
+			alert(data.message);
+			return;
+		}
+		$("#update-criminal form input[name='criminal_id']").val(criminalId);
+		$("#update-criminal form input[name='name']").val(data.criminal.name);
+		$("#update-criminal form input[name='email']").val(data.criminal.email);
+		$("#update-criminal form textarea[name='description']").val(data.criminal.description);
+		$("#update-criminal form textarea[name='address']").val(data.criminal.address);
+		$("#update-criminal form select[name='status'] option").each(function(index, el) {
+			if (this.value == data.criminal.status) {
+				$(this).attr('selected', 'selected');
+			}	
+		});
+		$("#update-criminal").modal("show");
+	})
+	.fail(function(err) {
+		console.log(err);
+	})
+	.always(function() {
+	});
+
+}
+
 function deleteCriminal(criminalId){
 	$.ajax({
 		url: '../api.php?action=delete_criminal',

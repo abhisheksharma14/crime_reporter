@@ -2,17 +2,17 @@
 session_start();
 require_once("../includes/db.php");
 validate_login('report');
+$stored_images = [];
 $response = 1;
 if ( isset( $_FILES['images'] ) ) {
 	$valid_mime = array("jpg", "png", "jpeg");
 	$source_files = $_FILES['images']['name'];
-	$stored_images = [];
 	$message = "";
 	$response = 0;
 	foreach ($source_files as $key => $source_file) {
 		$ext = end(explode(".",$source_file));
+		$filename = time().$_FILES['images']['name'][$key];
 		if (in_array(trim(strtolower($ext)), $valid_mime)) {	
-			$filename = time().$_FILES['images']['name'][$key];
 			$source_file = $_FILES['images']['tmp_name'][$key];
 			$dest_file = "../uploads/".$filename;
 			if (file_exists($dest_file)) {
