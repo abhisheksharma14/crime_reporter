@@ -42,6 +42,31 @@ function getCrime(crimeId){
 	});
 };
 
+function editCrime(crimeId){
+	$.ajax({
+		url: '../api.php?action=get_crime',
+		type: 'POST',
+		dataType: 'json',
+		data: {id: crimeId},
+	})
+	.done(function(data) {
+		if (data.repsonse == 0) {
+			alert(data.message);
+			return;
+		}
+		$("#update-crime form input[name='crime_id']").val(crimeId);
+		$("#update-crime form input[name='name']").val(data.crime.name);
+		$("#update-crime form input[name='type']").val(data.crime.type);
+		$("#update-crime form textarea[name='description']").val(data.crime.description);
+		$("#update-crime form input[name='occured_on']").val(data.crime.created_date);
+		$("#update-crime").modal("show");
+	})
+	.fail(function(err) {
+		console.log(err);
+	})
+	.always(function() {
+	});
+};
 
 function deleteCrime(crimeId){
 	$.ajax({
@@ -58,6 +83,7 @@ function deleteCrime(crimeId){
 		}
 	})
 	.fail(function(err) {
+		console.log(err);
 	})
 	.always(function(data) {
 	});

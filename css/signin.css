@@ -2,14 +2,15 @@ body {
     padding-top: 90px;
 }
 .panel-login {
-    border-color: #ccc;
+  border-color: #ccc;
+  background-color:rgba(255, 255, 255, 0.5);
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
 .panel-login>.panel-heading {
   color: #00415d;
-  background-color: #fff;
+  background-color:rgba(255, 255, 255, 0.5);
   border-color: #fff;
   text-align:center;
 }
@@ -96,9 +97,25 @@ body {
   text-transform: uppercase;
   border-color: #1CB94A;
 }
+
 .btn-register:hover,
 .btn-register:focus {
   color: #fff;
   background-color: #1CA347;
   border-color: #1CA347;
+}
+
+video { 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  background: url('') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
 }

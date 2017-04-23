@@ -123,7 +123,7 @@ function get_crime($crime_id){
 		$data["crime"]['type'] = $row['type'];
 		$data["crime"]['description'] = $row['description'];
 		$data["crime"]['reported_by'] = $row['reported_by_user'];
-		$data["crime"]['created_date'] = $row['created_date'];
+		$data["crime"]['created_date'] = date("Y-m-d",strtotime($row['created_date']));
 		$data["crime"]['images'] = $row['images'];
 		$data["crime"]['status'] = $row['status'];
 		$data["crime"]['tags'] = $row['tags'];

@@ -85,9 +85,7 @@ $criminal_list = fetch_criminal_list();
       <th>Status</th>
       <th>Reported By</th>
       <th>Dated</th>
-      <?php if ($_SESSION['role'] == 'admin'): ?>
-        <th>Action</th>
-      <?php endif ?>
+      <th>Action</th>  
     </tr>
   </thead>
   <tbody>
@@ -102,9 +100,9 @@ $criminal_list = fetch_criminal_list();
               <td>'.$crime['reported_by'].'</td>
               <td>'.$crime['created_date'].'</td>';
       if ($_SESSION['role'] == 'admin')
-                // <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="editCrime('.$crime['id'].')"></i> 
         echo '<td>
                 <i class="fa fa-eye pull-left btn btn-sm text-info" onclick="getCrime('.$crime['id'].')"></i> 
+                <i class="fa fa-pencil pull-left btn btn-sm text-warning" onclick="editCrime('.$crime['id'].')"></i> 
                 <i class="fa fa-trash text-danger pull-left btn btn-sm" onclick="deleteCrime('.$crime['id'].')"></i>
               </td>';
       else 
@@ -226,3 +224,70 @@ $criminal_list = fetch_criminal_list();
   </div><!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="update-crime">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Update Crime</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form col-md-12 col-sm-12 col-lg-12 col-xs-12" enctype="multipart/form-data" action="./update_crime.php" method="post">
+          <div class="form-group">
+            <label for="name">Name </label>
+            <input type="text" class="form-control" name="name" />
+            <input type="hidden" class="form-control" name="crime_id" />
+          </div>
+          <div class="form-group">
+            <label for="type">Type </label>
+            <input type="text" class="form-control" name="type" />
+          </div>
+          <div class="form-group">
+            <label for="crimminals">Criminals (Ignore if not to update)</label>
+            <select class="multiselect-dropdown" name="criminals[]" multiple="multiple">
+              <?php 
+              if (count($criminal_list)) {
+                foreach ($criminal_list as $key => $criminal){
+                  echo "<option value='$criminal[id]'>$criminal[name]</option>";
+                }
+              }else{ echo "<option value='0' disabled>No Criminal added yet</option>"; }
+              ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Decription </label>
+            <textarea class="form-control" name="description" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="occured_on">Occured On </label>
+            <input type="date" name="occured_on" value="" max="<?php echo date('Y-m-d');?>" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="notes">Upload Image: (Ignore if not to update)</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="200000" /> 
+            <input type="file" class="btn" name="images[]" multiple/>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-info pull-right" value="Upload!" />
+          </div>
+        </form>
+        <style type="text/css" media="screen">
+          .response span.alert{
+            width: 100%;
+            float: left;
+          }
+        </style>
+        <div class="response col-md-12 col-sm-12 col-lg-12 col-xs-12 pull-right">
+          <?php
+          if (isset($_SESSION['error'])){
+            echo $_SESSION['error'];
+            $_SESSION['error'] = "";
+          }
+          ?>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
