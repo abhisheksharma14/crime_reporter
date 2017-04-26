@@ -1,0 +1,85 @@
+1. To create an admin user,
+		i) Register a normal user.
+	   ii) Login to the database using command line or phpMyadmin
+	  iii) Locate the user to be converted to admin
+	   iv) Update the role column of that user to admin and save.
+	    v) The user will have admin previlages now. Login and confirm.
+
+2. Access Controls
+		i) Admin user can: Report new crime, create new criminal, Update crime details, update criminal details.
+	   ii) Normal menber/ Guest can only query crime details and search any particuler crime/criminal.
+
+3. Directory Structure:
+
+		.
+		├── api.php  //-> All the api functions are in this file (can be used to create aby generic apis for mobile apps, add new apis if needed.)
+		├── css      //-> CSS folder contains all the stylsheets
+		│   ├── bootstrap 			//-> Bootstrap frontend framework
+		│   │   ├── bootstrap.css
+		│   │   ├── bootstrap.css.map
+		│   │   ├── bootstrap-grid.css
+		│   │   ├── bootstrap-grid.css.map
+		│   │   ├── bootstrap-grid.min.css
+		│   │   ├── bootstrap-grid.min.css.map
+		│   │   ├── bootstrap.min.css
+		│   │   ├── bootstrap.min.css.map
+		│   │   ├── bootstrap-multiselect.css
+		│   │   ├── bootstrap-reboot.css
+		│   │   ├── bootstrap-reboot.css.map
+		│   │   ├── bootstrap-reboot.min.css
+		│   │   ├── bootstrap-reboot.min.css.map
+		│   │   ├── bootstrap-theme.css
+		│   │   ├── bootstrap-theme.css.map
+		│   │   ├── bootstrap-theme.min.css
+		│   │   ├── fal_style.css
+		│   │   ├── font-awesome.min.css
+		│   │   └── style.css 		//-> Bootstrap custome Override
+		│   ├── dashboard.css 		//-> custome dashboard page css
+		│   ├── dataTables.bootstrap.min.css
+		│   ├── dataTables.material.min.css
+		│   ├── fonts
+		│   │   ├── fontawesome-webfont.woff
+		│   │   ├── fontawesome-webfont.woff2
+		│   │   ├── glyphicons-halflings-regular.eot
+		│   │   ├── glyphicons-halflings-regular.svg
+		│   │   ├── glyphicons-halflings-regular.ttf
+		│   │   ├── glyphicons-halflings-regular.woff
+		│   │   └── glyphicons-halflings-regular.woff2
+		│   ├── material.min.css
+		│   └── signin.css //-> signin page css
+		├── db_backup.sql  //-> database backup
+		├── img
+		│   └── giphy.mp4  //-> login page background
+		├── includes
+		│   ├── crime_list.php  //-> crime list generator
+		│   ├── criminal_list.php  //-> criminal list generator
+		│   ├── db.php  //-> db connector file
+		│   ├── footer.php  //-> foote content
+		│   └── header.php  //-> header/ sidebar content
+		├── index.php  		//-> landing page / login page
+		├── instructions.txt
+		├── js	//-> all the javascript files
+		│   ├── bootstrap.js
+		│   ├── bootstrap.min.js
+		│   ├── bootstrap-multiselect.js
+		│   ├── common.js  //-> ajax calls , common javacript code
+		│   ├── dataTables.bootstrap.min.js
+		│   ├── dataTables.material.min.js
+		│   ├── jquery.dataTables.min.js
+		│   ├── jquery.min.js
+		│   └── tether.min.js
+		├── uploads 	//-> image upload directory
+		│   
+		└── user
+		    ├── criminal_list.php 
+		    ├── list.php
+		    ├── logout.php
+		    ├── report.php
+		    ├── update_crime.php
+		    ├── update_criminal.php
+		    ├── upload_crime.php
+		    ├── upload_criminal.php
+		    └── validate.php
+
+
+4. Datebase backup file is db_backup.sql (import that)

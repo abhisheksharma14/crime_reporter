@@ -1,2 +1,4 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
-includes/db.php
+#includes/db.php
+#db_backup.sql
+#instructions.txt
