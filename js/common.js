@@ -1,6 +1,6 @@
 function getCrime(crimeId){
 	$.ajax({
-		url: '../api.php?action=get_crime',
+		url: baseUrl+'api.php?action=get_crime',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: crimeId},
@@ -17,7 +17,7 @@ function getCrime(crimeId){
 			var crimeImageInner  = $("#crime-image-carousel .carousel-inner");
 			$(crimeImageOl).html("");
 			$(crimeImageInner).html("");
-			for (var i = crimeImages.length - 1; i >= 0; i--) {
+			for (var i = 0; i <= crimeImages.length - 1; i++) {
 				var imageLi = '<li data-target="#crime-image-carousel" data-slide-to="'+i+'" class="active"></li>';
 				var imgDiv = '<div class="item active"><img src="../uploads/'+crimeImages[i]+'" alt="Chania" width="380"></div>';
 				if (i!=0) {
@@ -28,7 +28,8 @@ function getCrime(crimeId){
 				$(crimeImageInner).append(imgDiv);
 			}
 			$("#crime-data .description").html("<b>Description: </b> "+data.crime.description);
-			$("#crime-data .criminals").html("<b>Criminals: </b> "+data.crime.criminal_names);
+			var crNames = (data.crime.criminal_names)?data.crime.criminal_names:"Not mapped";
+			$("#crime-data .criminals").html("<b>Criminals: </b> "+crNames);
 			$("#crime-data .type").html("<b>Type: </b> "+data.crime.type);
 			$("#crime-data .reported-by").html("<b>Reported By: </b> "+data.crime.reported_by);
 			$("#crime-data .status").html("<b>Status: </b> "+data.crime.status);
@@ -44,7 +45,7 @@ function getCrime(crimeId){
 
 function editCrime(crimeId){
 	$.ajax({
-		url: '../api.php?action=get_crime',
+		url: baseUrl+'api.php?action=get_crime',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: crimeId},
@@ -70,7 +71,7 @@ function editCrime(crimeId){
 
 function deleteCrime(crimeId){
 	$.ajax({
-		url: '../api.php?action=delete_crime',
+		url: baseUrl+'api.php?action=delete_crime',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: crimeId},
@@ -91,7 +92,7 @@ function deleteCrime(crimeId){
 
 function getCriminal(criminalId){
 	$.ajax({
-		url: '../api.php?action=get_criminal',
+		url: baseUrl+'api.php?action=get_criminal',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: criminalId},
@@ -108,7 +109,7 @@ function getCriminal(criminalId){
 			var criminalImageInner  = $("#criminal-image-carousel .carousel-inner");
 			$(criminalImageOl).html("");
 			$(criminalImageInner).html("");
-			for (var i = criminalImages.length - 1; i >= 0; i--) {
+			for (var i = 0; i <= criminalImages.length - 1; i++) {
 				var imageLi = '<li data-target="#criminal-image-carousel" data-slide-to="'+i+'" class="active"></li>';
 				var imgDiv = '<div class="item active"><img src="../uploads/'+criminalImages[i]+'" alt="Chania" width="380"></div>';
 				if (i!=0) {
@@ -135,7 +136,7 @@ function getCriminal(criminalId){
 
 function editCriminal(criminalId){
 	$.ajax({
-		url: '../api.php?action=get_criminal',
+		url: baseUrl+'api.php?action=get_criminal',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: criminalId},
@@ -167,7 +168,7 @@ function editCriminal(criminalId){
 
 function deleteCriminal(criminalId){
 	$.ajax({
-		url: '../api.php?action=delete_criminal',
+		url: baseUrl+'api.php?action=delete_criminal',
 		type: 'POST',
 		dataType: 'json',
 		data: {id: criminalId},

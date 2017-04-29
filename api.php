@@ -7,6 +7,10 @@ if (!(isset($_SESSION['user_id']))) {
 }
 
 switch ($_GET['action']) {
+	case 'get_crimes':
+		echo json_encode(get_all_crimes());		
+		break;
+
 	case 'get_crime':
 		$crime_id = $_POST['id'];
 		if (!$crime_id) {
@@ -99,9 +103,59 @@ switch ($_GET['action']) {
 		echo json_encode(delete_criminal($criminal_id));		
 		break;
 
-	default:
-		echo json_encode(array("reposne"=>0, "message"=>"Unkown Method. Please check and retry"));
+	case 'search':
+		if (!isset($_POST['query'])) {
+			echo json_encode(array("response"=>0, "message"=>"Not keywords recieved."));
+			break;
+		}
+		$keywords = $_POST['query'];
+		if (!$keywords) {
+			echo json_encode(array("response"=>0, "message"=>"Invalid IDs passed. Please refresh and retry."));
+			break;
+		}
+		echo json_encode(search($keywords));		
 		break;
+
+	default:
+		echo json_encode(array("reposne"=>0, "message"=>"Unknown Method. Please check and retry"));
+		break;
+}
+
+function get_all_crimes(){
+	global $conn;
+	$query_get_crime_details = "SELECT crime.*, GROUP_CONCAT(criminal.id) AS criminal_ids, user.name AS reported_by_user,
+		GROUP_CONCAT(criminal.name) AS criminal_names, GROUP_CONCAT(criminal.image SEPARATOR ' | ') AS criminal_images
+		FROM crime 
+		LEFT JOIN criminal_mapping cm ON cm.crime_id = crime.id
+		LEFT JOIN criminal ON criminal.id = cm.criminal_id
+		INNER JOIN user ON user.id = crime.reported_by
+		GROUP BY crime.id";
+	$result = $conn->query($query_get_crime_details);
+
+	if ($result->num_rows) {
+		$key = 0;
+	    while ($row = mysqli_fetch_assoc($result)) {
+			$data["crime"][$key]['id'] = $row['id'];
+			$data["crime"][$key]['name'] = $row['name'];
+			$data["crime"][$key]['type'] = $row['type'];
+			$data["crime"][$key]['description'] = $row['description'];
+			$data["crime"][$key]['reported_by'] = $row['reported_by_user'];
+			$data["crime"][$key]['created_date'] = date("Y-m-d",strtotime($row['created_date']));
+			$data["crime"][$key]['images'] = $row['images'];
+			$data["crime"][$key]['status'] = $row['status'];
+			$data["crime"][$key]['tags'] = $row['tags'];
+			$data["crime"][$key]['criminal_ids'] = $row['criminal_ids'];
+			$data["crime"][$key]['criminal_names'] = $row['criminal_names'];
+			$data["crime"][$key]['criminal_images'] = $row['criminal_images'];
+	    	$key++;
+	    };
+		$data["response"] = 1;
+		$data["message"] = "Crimes Found";
+  	}else{
+		$data["response"] = 1;
+		$data["message"] = "No result found. Please refresh and retry.";
+  	}
+  	return $data;
 }
 
 function get_crime($crime_id){
@@ -236,6 +290,60 @@ function get_mapping($where){
 
 function delete_mapping($where){
 	global $conn;
+}
+
+function search($keywords){
+	global $conn;
+	$keywords = explode(" ", $keywords);
+	$where_clause = "";
+	foreach ($keywords as $key => $value) {
+		if ($key == 0) {
+			$where_clause .= " description LIKE '%$value%' ";
+		}else{
+			$where_clause .= " OR description LIKE '%$value%' ";
+		}
+	}
+
+	$query_search_crime = "SELECT crime.*, user.name AS reported_by_user FROM crime INNER JOIN user ON crime.reported_by = user.id WHERE $where_clause";
+	$result_crimes = $conn->query($query_search_crime);
+	$data['result'] = array();
+
+	$idx = 0;
+	if ($result_crimes->num_rows) {
+	    while($row = mysqli_fetch_assoc($result_crimes)){
+			$data['result'][$idx]['id'] = $row['id'];
+			$data['result'][$idx]['name'] = $row['name'];
+			$data['result'][$idx]['description'] = $row['description'];
+			$data['result'][$idx]['created_by'] = $row['reported_by_user'];
+			$data['result'][$idx]['created_date'] = $row['created_date'];
+			$data['result'][$idx]['status'] = $row['status'];
+			$data['result'][$idx]['type'] = "crime";
+			$idx++;
+	    }
+  	}
+
+	$query_search_criminal = "SELECT criminal.*, user.name AS reported_by_user FROM criminal INNER JOIN user ON criminal.created_by = user.id WHERE $where_clause";
+	$result_criminals = $conn->query($query_search_criminal);
+	if ($result_criminals->num_rows) {
+	    while($row = mysqli_fetch_assoc($result_criminals)){
+			$data['result'][$idx]['id'] = $row['id'];
+			$data['result'][$idx]['name'] = $row['name'];
+			$data['result'][$idx]['description'] = $row['description'];
+			$data['result'][$idx]['created_by'] = $row['reported_by_user'];
+			$data['result'][$idx]['created_date'] = $row['created_date'];
+			$data['result'][$idx]['status'] = $row['status'];
+			$data['result'][$idx]['type'] = "criminal";
+			$idx++;
+	    }
+  	}
+
+  	if (count($data['result'])) {
+  		$data['response'] = 1;
+  	}else{
+  		$data['response'] = 0;
+  		$data['message'] = "No data found. Try other keywords.";
+  	}
+  	return $data;
 }
 
 $conn->close();

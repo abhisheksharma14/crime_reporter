@@ -1,0 +1,87 @@
+api_response
+
+url=> crime/api.php?action=action_name
+
+action=> get_crimes
+reponse=>
+	{
+		"crime": [{
+			"id": "2",
+			"name": "Petrol pump loot",
+			"type": "Loot",
+			"description": "Looted petrol pump ",
+			"reported_by": "Abhishek Sharma",
+			"created_date": "2017-04-15",
+			"images": "1492256059Screenshot from 2017-04-15 15:26:42.png",
+			"status": "unsolved",
+			"tags": "",
+			"criminal_ids": null,
+			"criminal_names": null,
+			"criminal_images": null
+		}, {
+			"id": "3",
+			"name": "Test",
+			"type": "Test",
+			"description": "Test Images",
+			"reported_by": "Abhishek Sharma",
+			"created_date": "2017-04-18",
+			"images": "1492483677Screenshot from 2017-04-16 00:11:58.png,1492483677Screenshot from 2017-04-15 15:26:42.png,1492483677Screenshot from 2017-04-14 16:15:05.png,1492483677Screenshot from 2017-04-13 17:50:34.png,1492483677Screenshot from 2017-04-05 13:05:55.png,1492483677Screenshot from 2017-03-31 02:54:31.png,1492483677Screenshot from 2017-03-23 11:59:40.png,1492483677Screenshot from 2017-03-20 13:02:00.png,1492483677Screenshot from 2017-02-15 16:25:51.png,1492483677Screenshot from 2017-01-22 22:55:18.png,1492483677Screenshot from 2017-01-18 23:22:51.png,1492483677Screenshot from 2017-01-16 22:22:01.png,1492483677Screenshot from 2017-01-16 17:25:03.png",
+			"status": "unsolved",
+			"tags": "",
+			"criminal_ids": null,
+			"criminal_names": null,
+			"criminal_images": null
+		}, {
+			"id": "4",
+			"name": "Test",
+			"type": "Map",
+			"description": "help",
+			"reported_by": "Abhishek Sharma",
+			"created_date": "2017-04-20",
+			"images": "1492630686Screenshot from 2017-01-22 22:55:18.png",
+			"status": "unsolved",
+			"tags": "",
+			"criminal_ids": "1",
+			"criminal_names": "Abcd",
+			"criminal_images": "1492589454Screenshot from 2017-02-15 16:25:51.png"
+		}, {
+			"id": "5",
+			"name": "test1asdfg",
+			"type": "asdasd",
+			"description": "Update test\r\n\r\n",
+			"reported_by": "Abhishek Sharma",
+			"created_date": "2017-04-20",
+			"images": "1492630798Screenshot from 2017-01-22 22:55:18.png",
+			"status": "unsolved",
+			"tags": "",
+			"criminal_ids": "1",
+			"criminal_names": "Abcd",
+			"criminal_images": "1492589454Screenshot from 2017-02-15 16:25:51.png"
+		}],
+		"response": 1,
+		"message": "Crimes Found"
+	}
+
+action => get_crime
+post_params => (int)crime_id 
+response=>
+	{
+		"crime": {
+			"id": "5",
+			"name": "test1asdfg",
+			"type": "asdasd",
+			"description": "Update test\r\n\r\n",
+			"reported_by": "Abhishek Sharma",
+			"created_date": "2017-04-20",
+			"images": "1492630798Screenshot from 2017-01-22 22:55:18.png",
+			"status": "unsolved",
+			"tags": "",
+			"criminal_ids": "1",
+			"criminal_names": "Abcd",
+			"criminal_images": "1492589454Screenshot from 2017-02-15 16:25:51.png"
+		},
+		"response": 1,
+		"message": "Crime Details Found"
+	}
+
+action => get_criminal

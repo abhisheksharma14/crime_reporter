@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../includes/db.php");
+require_once(URL."includes/db.php");
 validate_login('report');
 if ( isset( $_FILES['images'] ) ) {
 	$valid_mime = array("jpg", "png", "jpeg");
@@ -13,7 +13,7 @@ if ( isset( $_FILES['images'] ) ) {
 		if (in_array(trim(strtolower($ext)), $valid_mime)) {	
 			$filename = time().$_FILES['images']['name'][$key];
 			$source_file = $_FILES['images']['tmp_name'][$key];
-			$dest_file = "../uploads/".$filename;
+			$dest_file = URL."uploads/".$filename;
 			if (file_exists($dest_file)) {
 				$message = "<br/><span class='alert alert-danger'> $filenameThe file name already exists!! </span>" ;
 			} else {
@@ -70,5 +70,5 @@ if ($response) {
 
 $_SESSION['error'] = $message;
 $conn->close();
-redirect("./criminal_list.php");
+redirect("../user/criminal_list.php");
 ?>

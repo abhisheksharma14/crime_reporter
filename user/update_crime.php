@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../includes/db.php");
+require_once(URL."includes/db.php");
 validate_login('report');
 if (!isset($_POST['crime_id'])) {
 	$_SESSION['error'] = "Invalid Crime ID recieved. Please Refresh and retry";
@@ -21,7 +21,7 @@ if ( isset( $_FILES['images'] ) && $_FILES['images']['error'] == 0) {
 		$filename = time().$_FILES['images']['name'][$key];
 		if (in_array(trim(strtolower($ext)), $valid_mime)) {	
 			$source_file = $_FILES['images']['tmp_name'][$key];
-			$dest_file = "../uploads/".$filename;
+			$dest_file = URL."uploads/".$filename;
 			if (file_exists($dest_file)) {
 				$message = "<br/><span class='alert alert-danger'> $filenameThe file name already exists!! </span>" ;
 			} else {
