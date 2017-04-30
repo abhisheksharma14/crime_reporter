@@ -34,6 +34,8 @@ function getCrime(crimeId){
 			$("#crime-data .reported-by").html("<b>Reported By: </b> "+data.crime.reported_by);
 			$("#crime-data .status").html("<b>Status: </b> "+data.crime.status);
 			$("#crime-data .tags").html("<b>Tags: </b> "+data.crime.tags);
+			$("#crime-data .created_date").html("<b>Created On: </b> "+data.crime.created_date);
+			$("#crime-data .modified_date").html("<b>Modified On: </b> "+data.crime.modified_date);
 		}
 	})
 	.fail(function(err) {
@@ -125,6 +127,8 @@ function getCriminal(criminalId){
 			$("#criminal-data .reported-by").html("<b>Reported By: </b> "+data.criminal.created_by);
 			$("#criminal-data .status").html("<b>Status: </b> "+data.criminal.status);
 			$("#criminal-data .tags").html("<b>Tags: </b> "+data.criminal.tags);
+			$("#criminal-data .created_date").html("<b>Created On: </b> "+data.criminal.created_date);
+			$("#criminal-data .modified_date").html("<b>Modified On: </b> "+data.criminal.modified_date);
 		}
 	})
 	.fail(function(err) {

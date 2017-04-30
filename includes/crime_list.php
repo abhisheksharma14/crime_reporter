@@ -214,6 +214,8 @@ $criminal_list = fetch_criminal_list();
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 type"></div>
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 criminals"></div>
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tags"></div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 created_date"></div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 modified_date"></div>
         </div>
         <div style="clear: both;"></div>
       </div>

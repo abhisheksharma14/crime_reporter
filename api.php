@@ -141,6 +141,7 @@ function get_all_crimes(){
 			$data["crime"][$key]['description'] = $row['description'];
 			$data["crime"][$key]['reported_by'] = $row['reported_by_user'];
 			$data["crime"][$key]['created_date'] = date("Y-m-d",strtotime($row['created_date']));
+			$data["crime"][$key]['modified_date'] = date("Y-m-d",strtotime($row['modified_date']));
 			$data["crime"][$key]['images'] = $row['images'];
 			$data["crime"][$key]['status'] = $row['status'];
 			$data["crime"][$key]['tags'] = $row['tags'];
@@ -178,6 +179,7 @@ function get_crime($crime_id){
 		$data["crime"]['description'] = $row['description'];
 		$data["crime"]['reported_by'] = $row['reported_by_user'];
 		$data["crime"]['created_date'] = date("Y-m-d",strtotime($row['created_date']));
+		$data["crime"]['modified_date'] = date("Y-m-d",strtotime($row['modified_date']));
 		$data["crime"]['images'] = $row['images'];
 		$data["crime"]['status'] = $row['status'];
 		$data["crime"]['tags'] = $row['tags'];
@@ -242,6 +244,7 @@ function get_criminal($criminal_id){
 		$data["criminal"]['description'] = $row['description'];
 		$data["criminal"]['created_by'] = $row['reported_by_user'];
 		$data["criminal"]['created_date'] = $row['created_date'];
+		$data["criminal"]['modified_date'] = $row['modified_date'];
 		$data["criminal"]['images'] = $row['image'];
 		$data["criminal"]['status'] = $row['status'];
 		$data["criminal"]['tags'] = $row['tags'];
