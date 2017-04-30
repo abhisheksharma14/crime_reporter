@@ -316,6 +316,7 @@ function search($keywords){
 			$data['result'][$idx]['description'] = $row['description'];
 			$data['result'][$idx]['created_by'] = $row['reported_by_user'];
 			$data['result'][$idx]['created_date'] = $row['created_date'];
+			$data['result'][$idx]['modified_date'] = $row['modified_date'];
 			$data['result'][$idx]['status'] = $row['status'];
 			$data['result'][$idx]['type'] = "crime";
 			$idx++;
@@ -331,6 +332,7 @@ function search($keywords){
 			$data['result'][$idx]['description'] = $row['description'];
 			$data['result'][$idx]['created_by'] = $row['reported_by_user'];
 			$data['result'][$idx]['created_date'] = $row['created_date'];
+			$data['result'][$idx]['modified_date'] = $row['modified_date'];
 			$data['result'][$idx]['status'] = $row['status'];
 			$data['result'][$idx]['type'] = "criminal";
 			$idx++;

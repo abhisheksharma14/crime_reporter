@@ -20,9 +20,11 @@
         <th>Status</th>
         <th>Reported By</th>
         <th>Dated</th>
+        <th>Modified On</th>
       </tr>
     </thead>
   </table>
+  <span class="alert alert-warning" style="display: none;" id="search-response"></span>
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="crime-details">

@@ -1,6 +1,8 @@
 function search(){
     var search_query = $("input[name='search_query']").val()
     if ($.trim(search_query).length < 3) {
+        $('#search-result-table').dataTable().fnClearTable();
+        $("#search-response").hide();
         return false;
     }
     $("#search-btn").html("<i class='fa fa-spinner fa-pulse fa-fw'>");
@@ -15,7 +17,7 @@ function search(){
             var dataSet = [];
             for (var i = 0; i < res.result.length; i++) {
                 var resultSet = res.result[i];
-                dataSet.push([resultSet.id, resultSet.name, resultSet.type, resultSet.status, resultSet.created_by, resultSet.created_date]);
+                dataSet.push([resultSet.id, resultSet.name, resultSet.type, resultSet.status, resultSet.created_by, resultSet.created_date, resultSet.modified_date]);
             }
             $('#search-result-table').dataTable( {
                 retrieve: true,
@@ -27,12 +29,15 @@ function search(){
                     { title: "Status" },
                     { title: "Reported By" },
                     { title: "Date" },
+                    { title: "Modified On" },
                 ]
             });
             $('#search-result-table').dataTable().fnClearTable();
             $('#search-result-table').dataTable().fnAddData(dataSet);
+            $("#search-response").html(res.result.length+" Matching results found.").hide();
         }else{
-            alert("No data found. try some other keywords.");
+            $('#search-result-table').dataTable().fnClearTable();
+            $("#search-response").html("No data found. try some other keywords.").show();
         }
     })
     .fail(function() {
