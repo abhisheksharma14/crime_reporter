@@ -2,7 +2,7 @@
 Small Project in Native PHP with Basic CRUD operations
 
 Objective: 
-    Practicing Project
+    Practice Project
 
 Features:
     Stores crime and criminal records,
