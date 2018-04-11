@@ -2,3 +2,4 @@
 #includes/db.php
 #db_backup.sql
 #instructions.txt
+.DS_Store

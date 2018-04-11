@@ -15,6 +15,37 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `role` varchar(50) NOT NULL DEFAULT 'member',
+  `name` varchar(50) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `image` varchar(1000) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_u_mobile` (`mobile`),
+  UNIQUE KEY `uniq_u_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+
 --
 -- Table structure for table `crime`
 --
@@ -94,35 +125,6 @@ CREATE TABLE `criminal_mapping` (
 
 --
 -- Dumping data for table `criminal_mapping`
---
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) NOT NULL,
-  `role` varchar(50) NOT NULL DEFAULT 'member',
-  `name` varchar(50) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `image` varchar(1000) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_date` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_u_mobile` (`mobile`),
-  UNIQUE KEY `uniq_u_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
