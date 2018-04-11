@@ -1,6 +1,6 @@
 <?php 
 session_start();
-define("URL", 'http://'.$_SERVER['SERVER_NAME'].'/crime/', false);
+define("URL", 'http://'.$_SERVER['SERVER_NAME'].'/', false);
 require_once("db.php");
 validate_login();
 $url = $_SERVER['REQUEST_URI'];

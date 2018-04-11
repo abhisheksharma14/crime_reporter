@@ -1,6 +1,6 @@
 api_response
 
-url=> crime/api.php?action=action_name
+url=> /api.php?action=action_name
 
 action=> get_crimes
 reponse=>

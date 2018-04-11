@@ -1,7 +1,7 @@
 <?php session_start(); 
   require_once("./includes/db.php");
   if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
-    redirect("./user/list.php");
+    redirect("/user/list.php");
   }
   $conn->close();
 ?>
